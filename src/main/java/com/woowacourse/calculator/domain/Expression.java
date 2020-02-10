@@ -39,7 +39,7 @@ public class Expression {
 	}
 
 	public void validateExpressionLength(final List<Double> numbers, final List<OperatorType> operators) {
-		if (numbers.size() == 0) {
+		if (numbers.isEmpty()) {
 			throw new IllegalArgumentException(NUMBER_SIZE_OUT_OF_RANGE_EXCEPTION_MESSAGE);
 		}
 		if (numbers.size() != operators.size() + 1) {
