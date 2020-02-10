@@ -13,6 +13,10 @@ import java.util.Objects;
  * 날짜 : 2020/02/06
  */
 public class Expression {
+	private static final String NUMBER_SIZE_OUT_OF_RANGE_EXCEPTION_MESSAGE =
+			"수식은 최소한 하나의 숫자를 가져야 합니다.";
+	private static final String NUMBER_AND_OPERATOR_SIZE_MISMATCH_EXCEPTION_MESSAGE =
+			"피연산자의 개수는 연산자의 개수보다 반드시 하나 더 있어야 합니다.";
 	private static final int START_INDEX = 0;
 
 	private final List<Double> numbers;
@@ -25,17 +29,21 @@ public class Expression {
 	}
 
 	public void validateExpression(final List<Double> numbers, final List<OperatorType> operators) {
+		validateNull(numbers, operators);
+		validateExpressionLength(numbers, operators);
+	}
+
+	public void validateNull(final List<Double> numbers, final List<OperatorType> operators) {
 		Objects.requireNonNull(numbers);
 		Objects.requireNonNull(operators);
-		validateExpressionLength(numbers, operators);
 	}
 
 	public void validateExpressionLength(final List<Double> numbers, final List<OperatorType> operators) {
 		if (numbers.size() == 0) {
-			throw new IllegalArgumentException("수식은 최소한 하나의 숫자를 가져야 합니다.");
+			throw new IllegalArgumentException(NUMBER_SIZE_OUT_OF_RANGE_EXCEPTION_MESSAGE);
 		}
 		if (numbers.size() != operators.size() + 1) {
-			throw new IllegalArgumentException("피연산자의 개수는 연산자의 개수보다 반드시 하나 더 있어야 합니다.");
+			throw new IllegalArgumentException(NUMBER_AND_OPERATOR_SIZE_MISMATCH_EXCEPTION_MESSAGE);
 		}
 	}
 

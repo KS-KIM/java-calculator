@@ -1,7 +1,6 @@
 package calculator;
 
 import com.woowacourse.calculator.domain.OperatorType;
-import com.woowacourse.calculator.exception.InfinityException;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -84,7 +83,7 @@ public class OperatorTypeTest {
 	void calculate_ExceedDoubleRange_OverflowInfinityExceptionThrown() {
 		OperatorType plus = OperatorType.PLUS;
 		Assertions.assertThatThrownBy(() -> plus.calculate(Double.MAX_VALUE, Double.MAX_VALUE))
-				.isInstanceOf(InfinityException.class);
+				.isInstanceOf(ArithmeticException.class);
 	}
 
 	@Test
@@ -92,6 +91,6 @@ public class OperatorTypeTest {
 	void calculate_ExceedDoubleRange_UnderflowInfinityExceptionThrown() {
 		OperatorType minus = OperatorType.MINUS;
 		Assertions.assertThatThrownBy(() -> minus.calculate(-Double.MAX_VALUE, Double.MAX_VALUE))
-				.isInstanceOf(InfinityException.class);
+				.isInstanceOf(ArithmeticException.class);
 	}
 }

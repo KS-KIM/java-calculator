@@ -40,11 +40,11 @@ public class ExpressionFactoryTest {
 
 	@ParameterizedTest
 	@DisplayName("공백을 여러번 입력한 경우")
-	@ValueSource(strings = {"2   + 3", "2 +  3"})
+	@ValueSource(strings = {"2   + 3", "2 +  3", "    2 + 3", "2 + 3     "})
 	void create_ConsecutiveSpace_IllegalArgumentExceptionThrown(String input) {
 		Assertions.assertThatThrownBy(() -> ExpressionFactory.create(input))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("empty String");
+				.hasMessageContaining("수식에 연속된 공백이 두 개 이상 포함되어 있습니다");
 	}
 
 	@Test
